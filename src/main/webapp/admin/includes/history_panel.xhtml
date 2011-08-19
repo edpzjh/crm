@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich">
+	
+	<h:panelGroup layout="block">
+			<h:form>
+				<h:outputText value="No History Yet" rendered="#{empty elog}"/>
+				<rich:dataTable value="#{elog}" var="_e" resizableColumns="true" noDataLabel="Nothing to see here" style="width:100%" rendered="#{not empty elog}">
+					<rich:column styleClass="left" headerClass="left" style="width:10%" >
+						<f:facet name="header">User</f:facet>
+						<h:outputText value="#{_e.user.contact.name}" />
+					</rich:column>
+					
+					<rich:column styleClass="left" headerClass="left" style="width:70%">
+						<f:facet name="header">Message</f:facet>
+						
+						<h:outputText value="#{auditTools.firstLine(_e)}" rendered="#{_e != null}"/>
+						<ui:fragment rendered="#{auditTools.containsMultipleLines(_e)}">
+							<h:outputText value=" - " />
+							<a href="javascript:$j(#{rich:element('more')}).slideToggle();">More</a>
+							<h:panelGroup layout="block" id="more" style="display:none;clear:both;">
+								<ui:repeat var="_line" value="#{auditTools.additionalLines(_e)}">
+									<div style="clear:both;">
+										<h:outputText value="#{_line}" />
+									</div>
+								</ui:repeat>
+							</h:panelGroup>
+						</ui:fragment>
+					</rich:column>
+					
+					<rich:column styleClass="center" headerClass="center" style="width:15%">
+						<f:facet name="header">Date/Time</f:facet>
+						<h:outputText value="#{_e.date}">
+							<f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss z" timeZone="#{userTimeZone}"/>
+						</h:outputText>
+					</rich:column>
+					
+				</rich:dataTable>
+			</h:form>
+	</h:panelGroup>	
+</ui:composition>

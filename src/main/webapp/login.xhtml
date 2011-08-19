@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:s="http://jboss.org/seam/faces"
+	xmlns:rich="http://richfaces.org/rich"
+	template="/WEB-INF/templates/default.xhtml">
+	<ui:define name="metadata">
+		<f:metadata>
+			<s:viewAction action="#{alreadyLoggedIn.alreadyLoggedIn}" />
+		</f:metadata>
+	</ui:define>
+	<ui:define name="content">
+		<rich:panel header="Login" style="width:3">
+			<h:form>
+				<h:panelGrid columns="3">
+				
+					<h:outputLabel for="username" value="Username: " />
+					<h:inputText id="username" value="#{credentials.username}" required="true" requiredMessage="Username is Required"/>
+					<rich:message for="username"/>
+					
+					<h:outputLabel for="password" value="Password: " />
+					<h:inputSecret id="password" value="#{credentials.password}" required="true" requiredMessage="Password is Required"/>
+					<rich:message for="password"/>
+					
+				</h:panelGrid>
+				<div class="actionButtons">
+					<h:commandButton value="Login" action="#{identity.login}" />
+				</div>
+			</h:form>
+
+		</rich:panel>
+	</ui:define>
+</ui:composition>

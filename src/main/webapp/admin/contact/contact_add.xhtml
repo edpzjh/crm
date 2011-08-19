@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:s="http://jboss.org/seam/faces"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a="http://richfaces.org/a4j"
+	xmlns:p="http://primefaces.prime.com.tr/ui"
+	template="/WEB-INF/templates/default.xhtml">
+	<ui:define name="content">
+		<rich:panel header="Add Contact">
+		
+			<h:form id="contactForm">
+			
+				<ui:param name="_contact" value="#{newContact}" />
+				<ui:include src="/admin/contact/contact_form.xhtml" />			
+				
+				<div class="actionButtons">
+					<h:commandButton action="#{contactUtil.add}" value="Add" />
+					<h:button value="Cancel" outcome="/admin/account/account_view.xhtml">
+						<f:param name="oid" value="#{newContact.account.id}"></f:param>
+					</h:button>
+				</div>
+				
+			</h:form>
+			<div style="clear:both;" />
+		</rich:panel>
+
+	</ui:define>
+</ui:composition>

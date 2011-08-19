@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:s="http://jboss.org/seam/faces"
+	xmlns:rich="http://richfaces.org/rich"
+	template="/WEB-INF/templates/default.xhtml">
+	<f:metadata>
+		<s:viewAction action="#{conversationManagement.begin}" />
+		<f:viewParam name="oid" value="#{account.id}" />
+		<ui:param name="baseEntity" value="#{account}" />	
+	</f:metadata>
+	<ui:define name="content">
+		<rich:panel header="#{account.name}">
+			<div class="roundBox">
+				<div id="left" class="split-left">
+					<div class="object-field">
+						<div class="object-field-label">Name:</div>
+						<div class="object-field-value">#{account.name}</div>
+					</div>
+					<div class="object-field">
+						<div class="object-field-label">Type:</div>
+						<div class="object-field-value">#{account.type}</div>
+					</div>
+				</div>
+				<div id="right" class="split-right">
+					<div class="object-field">
+						<div class="object-field-label">Created:</div>
+						<div class="object-field-value">
+						<h:outputText value="#{account.dateCreated}">
+							<f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss z"/>
+						</h:outputText>
+						</div>
+					</div>
+					<div class="object-field">
+						<div class="object-field-label">Modified:</div>
+						<div class="object-field-value">
+						<h:outputText value="#{account.dateModified}">
+							<f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss z"/>
+						</h:outputText>
+						</div>
+					</div>
+				</div>
+				<div style="clear:both;" />				
+			</div>
+		</rich:panel>
+		
+		<div class="actionButtons">
+			<h:button value="Edit" outcome="/admin/account/account_edit.xhtml">
+				<f:param name="oid" value="#{account.id}" />
+			</h:button>
+		</div>
+		
+		<rich:collapsiblePanel header="Contacts" switchType="client" expanded="#{not empty account.contacts}" styleClass="innerPanel">
+			<div class="actionButtons">
+				<h:form>
+					<h:commandButton value="Add Contact" action="/admin/contact/contact_add.xhtml" />
+				</h:form>
+			</div>
+			<h:outputText value="No Contacts Yet" rendered="#{empty account.contacts}" />			
+			<rich:dataTable value="#{account.contacts}" var="_contact" rendered="#{not empty account.contacts}" style="width:100%">
+				<rich:column styleClass="left">
+					<f:facet name="header">Name</f:facet>
+					<h:link value="#{_contact.name}" outcome="/admin/contact/contact_view.xhtml">
+						<f:param name="oid" value="#{_contact.id}" />
+					</h:link>
+				</rich:column>
+				<rich:column styleClass="left">
+					<f:facet name="header">Email</f:facet>
+					<h:outputText value="#{_contact.emailAddress}" />
+				</rich:column>
+			</rich:dataTable>
+		</rich:collapsiblePanel>
+		
+		<rich:collapsiblePanel header="Addresses" switchType="client" expanded="#{not empty account.addresses}" styleClass="innerPanel">
+			<h:outputText value="No Addresses Yet" rendered="#{empty account.addresses}" />
+			<rich:dataTable value="#{account.addresses}" var="_address" rendered="#{not empty  account.addresses}" style="width:100%">
+			
+				<rich:column styleClass="center" headerClass="center">
+					<f:facet name="header">Action</f:facet>
+					<h:button value="View" outcome="/admin/account/address/address_view.xhtml">
+						<f:param name="oid" value="#{_address.id}"/>
+					</h:button>
+				</rich:column>
+				
+				<rich:column styleClass="left">
+					<f:facet name="header">Type</f:facet>
+					<h:outputText value="#{_address.type.displayName}" />
+				</rich:column>
+				<rich:column styleClass="left">
+					<f:facet name="header">Address</f:facet>
+					<h:outputText value="#{_address.address1}" />
+				</rich:column>
+				<rich:column styleClass="left">
+					<f:facet name="header">City</f:facet>
+					<h:outputText value="#{_address.city}" />
+				</rich:column>
+				<rich:column styleClass="left">
+					<f:facet name="header">State</f:facet>
+					<h:outputText value="#{_address.state}" />
+				</rich:column>
+				<rich:column styleClass="left">
+					<f:facet name="header">Postal</f:facet>
+					<h:outputText value="#{_address.postalCode}" />
+				</rich:column>
+				<rich:column styleClass="left">
+					<f:facet name="header">County</f:facet>
+					<h:outputText value="#{_address.county.displayName}" />
+				</rich:column>
+				<rich:column styleClass="left">
+					<f:facet name="header">Description</f:facet>
+					<h:outputText value="#{_address.description}" />
+				</rich:column>
+			</rich:dataTable>
+		</rich:collapsiblePanel>
+		
+		<rich:collapsiblePanel header="History" switchType="client" expanded="true" styleClass="innerPanel">
+			<ui:param name="elog" value="#{accountEventLogs}" />
+			<ui:include src="/admin/includes/history_panel.xhtml" />
+		</rich:collapsiblePanel>
+		
+	</ui:define>
+</ui:composition>

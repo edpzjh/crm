@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	template="/WEB-INF/templates/default.xhtml">
+	<ui:define name="content">
+		<rich:panel header="#{sessionUser.user.contact.name}">
+			<h:form>
+				<h:panelGrid columns="3">
+
+					<h:outputLabel for="firstName" value="First Name" />
+					<h:inputText id="firstName" value="#{sessionContact.firstName}"
+						required="true" size="35" requiredMessage="Required"/>
+					<rich:message for="firstName" />
+					
+					<h:outputLabel for="lastName" value="Last Name" />
+					<h:inputText id="lastName" value="#{sessionContact.lastName}"
+						required="true" size="35" requiredMessage="Required"/>
+					<rich:message for="lastName" />
+					
+					<h:outputLabel for="emailAddress" value="Email Address" />
+					<h:inputText id="emailAddress" value="#{sessionContact.emailAddress}"
+						required="true" size="35" requiredMessage="Required"/>
+					<rich:message for="emailAddress" />
+					
+				</h:panelGrid>
+				<div class="actionButtons">
+					<h:commandButton value="Update" action="#{editProfile.updateProfile}" />
+				</div>
+			</h:form>
+		</rich:panel>
+	</ui:define>
+</ui:composition>
+

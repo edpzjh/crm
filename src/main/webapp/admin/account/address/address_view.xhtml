@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:s="http://jboss.org/seam/faces"
+	xmlns:rich="http://richfaces.org/rich"
+	template="/WEB-INF/templates/default.xhtml">
+	<f:metadata>
+		<s:viewAction action="#{conversationManagement.begin}" />
+		<f:viewParam name="oid" value="#{address.id}" />
+		<ui:param name="baseEntity" value="#{account}" />	
+	</f:metadata>
+	<ui:define name="content">
+		<rich:panel header="Address for #{address.account.name}">
+			
+			<div class="roundBox">
+				<div id="left" class="split-left">
+				
+					<div class="object-field">
+						<div class="object-field-label">Account:</div>
+						<div class="object-field-value">
+							<h:link value="#{address.account.name}" outcome="/admin/account/account_view.xhtml">
+								<f:param name="oid" value="#{address.account.id}"/>
+							</h:link> 
+						</div>
+					</div>
+				
+					<div class="object-field">
+						<div class="object-field-label">Description:</div>
+						<div class="object-field-value">#{address.description}</div>
+					</div>
+				
+					<div class="object-field">
+						<div class="object-field-label">Address:</div>
+						<div class="object-field-value">#{address.address1}</div>
+					</div>
+					
+					<div class="object-field">
+						<div class="object-field-label">Address 2:</div>
+						<div class="object-field-value">#{address.address2}</div>
+					</div>
+					
+					<div class="object-field">
+						<div class="object-field-label">City:</div>
+						<div class="object-field-value">#{address.city}</div>
+					</div>
+					
+					<div class="object-field">
+						<div class="object-field-label">State:</div>
+						<div class="object-field-value">#{address.state}</div>
+					</div>
+					
+					<div class="object-field">
+						<div class="object-field-label">Postal Code:</div>
+						<div class="object-field-value">#{address.postalCode}</div>
+					</div>
+					
+				</div>
+				<div id="right" class="split-right">
+				
+					<div class="object-field">
+						<div class="object-field-label">Type:</div>
+						<div class="object-field-value">#{address.type.displayName}</div>
+					</div>	
+				
+					<div class="object-field">
+						<div class="object-field-label">County:</div>
+						<div class="object-field-value">#{address.county.displayName}</div>
+					</div>				
+					
+					<div class="object-field">
+						<div class="object-field-label">Created:</div>
+						<div class="object-field-value">
+						<h:outputText value="#{address.dateCreated}">
+							<f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss z" timeZone="#{userTimeZone}" />
+						</h:outputText>
+						</div>
+					</div>
+					
+					<div class="object-field">
+						<div class="object-field-label">Modified:</div>
+						<div class="object-field-value">
+						<h:outputText value="#{address.dateCreated}">
+							<f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss z" timeZone="#{userTimeZone}" />
+						</h:outputText>
+						</div>
+					</div>
+					
+					<div class="object-field">
+						<div class="object-field-label">Validate:</div>
+						<div class="object-field-value">
+						<h:outputText value="#{address.dateValidated}">
+							<f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss z" timeZone="#{userTimeZone}" />
+						</h:outputText>
+						</div>
+					</div>
+					
+				</div>
+				<div style="clear:both;" />				
+			</div>
+			
+		</rich:panel>
+		
+		<rich:collapsiblePanel header="History" switchType="client" expanded="true" styleClass="innerPanel">
+			<ui:param name="elog" value="#{addressEventLogs}" />
+			<ui:include src="/admin/includes/history_panel.xhtml" />
+		</rich:collapsiblePanel>
+		
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	template="/WEB-INF/templates/default.xhtml">
+	<ui:define name="content">
+	
+		<rich:panel header="Accounts">
+				<h:form>
+				
+					<rich:dataTable var="_a" value="#{allAccounts}">
+					
+						<rich:column styleClass="left">
+							<f:facet name="header">Name</f:facet>
+							<h:link value="#{_a.name}" outcome="/admin/account/account_view">
+								<f:param name="oid" value="#{_a.id}" />
+							</h:link>
+						</rich:column>
+						
+						<rich:column styleClass="left" style="width:20%">
+							<f:facet name="header">Type</f:facet>
+							<h:outputText value="#{_a.type}" />
+						</rich:column>
+						
+					</rich:dataTable>
+					
+				</h:form>
+		</rich:panel>
+
+	</ui:define>
+
+</ui:composition>
