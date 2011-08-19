@@ -57,9 +57,9 @@ public class SeedDataImporter {
 
 	private void loadCody() throws GeneralSecurityException {
 		Contact c = new Contact();
-		c.setFirstName("Cody");
-		c.setLastName("Lerum");
-		c.setEmailAddress("cody.lerum@gmail.com");
+		c.setFirstName("Seamy");
+		c.setLastName("Seamerson");
+		c.setEmailAddress("seamey@seamframework.org");
 		c.setType(ContactType.PERSON);
 		c.setTimeZone(TimeZone.MST7MDT);
 	    c.setAccount(widgets);
@@ -68,7 +68,7 @@ public class SeedDataImporter {
 
 		User u = new User();
 		u.setDateCreated(CalendarTools.nowNoMilliseconds());
-		String hash = securityUtil.hash(u, "password");
+		String hash = securityUtil.hash(u, "seamrocks");
 		u.setPassword(hash);
 		u.setContact(c);
 
