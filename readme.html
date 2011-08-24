@@ -6,7 +6,7 @@
 <meta name="generator" content="HTML::TextToHTML v2.51"/>
 </head>
 <body>
-<h1><a name="section_1">polaris</a></h1>
+<h1><a name="section_1">SeamCRM</a></h1>
 <p> <strong>Source archetype:</strong> jboss-javaee6-webapp
 </p><h2><a name="section_1_1">What is it?</a></h2>
 <p> This is your project! It's a sample, deployable Maven 3 project to help you
@@ -67,7 +67,7 @@
  Maven property, you can deploy to JBoss AS by executing the following command:
 </p><pre>
   mvn package jboss:hard-deploy</pre>
-<p> This will deploy two artifacts, target/polaris.war and
+<p> This will deploy two artifacts, target/crm.war and
  default-ds.xml.
  
 </p><dl>
@@ -85,7 +85,7 @@
   </li><li>Override the jboss.home Maven property from the commandline using -Djboss.home=/path/to/jboss-as</li></ol>
 <p> Now start JBoss AS. The application will be running at the following URL:
 </p><ul>
-  <li><a href="http://localhost:8080/polaris/">http://localhost:8080/polaris/</a></li></ul>
+  <li><a href="http://localhost:8080/crm/">http://localhost:8080/crm/</a></li></ul>
 <p> To undeploy from JBoss AS, run this command:
 </p><pre>
   mvn jboss:hard-undeploy</pre>
@@ -110,13 +110,13 @@
  have the GlassFish Tools Eclipse plug-in, you have to enable this feature.
  Select Window &gt; Preferences &gt; GlassFish Server Preferences and check the
  option "Start JavaDB database process when &gt; Starting GlassFish Server"</dd></dl>
-<p> Now you can either deploy the target/polaris.war through the
+<p> Now you can either deploy the target/crm.war through the
  web-based GlassFish admininstration console, or you can again use asadmin:
 </p><pre>
-  ./asadmin deploy target/polaris.war</pre>
+  ./asadmin deploy target/crm.war</pre>
 <p> To undeploy the application, run:
 </p><pre>
-  ./asadmin undeploy polaris</pre>
+  ./asadmin undeploy crm</pre>
 <h2><a name="section_1_4">Upgrading Weld in GlassFish 3.1</a></h2>
 <p> There are several known CDI visibility issues in the stock version of Weld
  that ships with GlassFish 3.1. One of these issues affects the sample code in

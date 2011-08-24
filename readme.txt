@@ -1,4 +1,4 @@
- polaris
+ crm
  ++++++++++++++++++++++++
 
  #Source archetype:# jboss-javaee6-webapp
@@ -75,7 +75,7 @@
 
   mvn package jboss:hard-deploy
 
- This will deploy two artifacts, target/polaris.war and
+ This will deploy two artifacts, target/crm.war and
  default-ds.xml.
  
  IMPORTANT:
@@ -97,7 +97,7 @@
 
  Now start JBoss AS. The application will be running at the following URL:
 
- - http://localhost:8080/polaris/
+ - http://localhost:8080/crm/
 
  To undeploy from JBoss AS, run this command:
 
@@ -128,14 +128,14 @@
  Select Window > Preferences > GlassFish Server Preferences and check the
  option "Start JavaDB database process when > Starting GlassFish Server"
 
- Now you can either deploy the target/polaris.war through the
+ Now you can either deploy the target/crm.war through the
  web-based GlassFish admininstration console, or you can again use asadmin:
 
-  ./asadmin deploy target/polaris.war
+  ./asadmin deploy target/crm.war
 
  To undeploy the application, run:
 
-  ./asadmin undeploy polaris
+  ./asadmin undeploy crm
 
  Upgrading Weld in GlassFish 3.1
  ===============================
