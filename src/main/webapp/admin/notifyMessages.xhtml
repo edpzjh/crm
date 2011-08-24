@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    template="/WEB-INF/templates/default.xhtml">
+    <ui:define name="content">
+	
+		<h:form>
+			<rich:panel header="Action Tests">
+				<div class="actionButtons">
+					<h:commandButton action="#{notifyTest.info()}" value="Info" />
+					<h:commandButton action="#{notifyTest.warn()}" value="Warn" />
+					<h:commandButton action="#{notifyTest.error()}" value="Error" />
+					<h:commandButton action="#{notifyTest.fatal()}" value="Fatal" />				
+				</div>				
+			</rich:panel>
+			
+			<rich:panel header="Action Listener Tests">
+				<div class="actionButtons">
+					<h:commandButton actionListener="#{notifyTest.info()}" value="Info" />
+					<h:commandButton actionListener="#{notifyTest.warn()}" value="Warn" />
+					<h:commandButton actionListener="#{notifyTest.error()}" value="Error" />
+					<h:commandButton actionListener="#{notifyTest.fatal()}" value="Fatal" />				
+				</div>				
+			</rich:panel>
+				
+		</h:form>		
+    </ui:define>
+</ui:composition>
