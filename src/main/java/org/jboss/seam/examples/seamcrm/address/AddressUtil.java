@@ -10,11 +10,11 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
 
-import org.jboss.logging.Logger;
+import org.jboss.solder.logging.Logger;
+import org.jboss.solder.servlet.http.RequestParam;
 import org.jboss.seam.examples.seamcrm.aaa.EntityLogs;
 import org.jboss.seam.examples.seamcrm.aaa.EventLog;
 import org.jboss.seam.examples.seamcrm.core.Existing;
-import org.jboss.seam.servlet.http.RequestParam;
 
 /**
  * 

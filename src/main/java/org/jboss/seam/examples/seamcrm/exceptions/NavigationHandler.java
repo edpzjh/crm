@@ -6,11 +6,11 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
-import org.jboss.logging.Logger;
+import org.jboss.solder.exception.control.CaughtException;
+import org.jboss.solder.exception.control.Handles;
+import org.jboss.solder.exception.control.HandlesExceptions;
+import org.jboss.solder.logging.Logger;
 import org.jboss.seam.conversation.spi.SeamConversationContext;
-import org.jboss.seam.exception.control.CaughtException;
-import org.jboss.seam.exception.control.Handles;
-import org.jboss.seam.exception.control.HandlesExceptions;
 
 @HandlesExceptions
 public class NavigationHandler {

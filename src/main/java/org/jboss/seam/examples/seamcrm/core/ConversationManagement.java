@@ -5,7 +5,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.jboss.logging.Logger;
+import org.jboss.solder.logging.Logger;
 
 @RequestScoped
 @Named

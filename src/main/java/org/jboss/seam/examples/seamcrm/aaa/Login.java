@@ -11,7 +11,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.NonUniqueResultException;
 
-import org.jboss.logging.Logger;
+import org.jboss.solder.logging.Logger;
 import org.jboss.seam.examples.seamcrm.user.User;
 import org.jboss.seam.international.status.Messages;
 import org.jboss.seam.security.BaseAuthenticator;

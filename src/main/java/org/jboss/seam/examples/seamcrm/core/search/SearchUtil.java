@@ -15,7 +15,7 @@ import org.apache.lucene.search.Query;
 import org.apache.lucene.util.Version;
 import org.hibernate.search.jpa.FullTextEntityManager;
 import org.hibernate.search.jpa.Search;
-import org.jboss.logging.Logger;
+import org.jboss.solder.logging.Logger;
 import org.jboss.seam.examples.seamcrm.core.IndexedEntity;
 import org.jboss.seam.international.status.Messages;
 

@@ -13,10 +13,10 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
 
-import org.jboss.logging.Logger;
 import org.jboss.seam.examples.seamcrm.user.User;
 import org.jboss.seam.international.Alter;
-import org.jboss.seam.solder.core.Client;
+import org.jboss.solder.core.Client;
+import org.jboss.solder.logging.Logger;
 
 
 /**

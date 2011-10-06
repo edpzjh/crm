@@ -8,7 +8,7 @@ import javax.ejb.Startup;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
-import org.jboss.logging.Logger;
+import org.jboss.solder.logging.Logger;
 import org.jboss.seam.examples.seamcrm.aaa.SecurityUtil;
 import org.jboss.seam.examples.seamcrm.account.Account;
 import org.jboss.seam.examples.seamcrm.account.AccountType;

@@ -3,7 +3,7 @@ package org.jboss.seam.examples.seamcrm.account;
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
 
-import org.jboss.logging.Logger;
+import org.jboss.solder.logging.Logger;
 import org.jboss.seam.examples.seamcrm.aaa.AuditTools;
 import org.jboss.seam.examples.seamcrm.aaa.EventLog;
 import org.jboss.seam.examples.seamcrm.tools.MultiLineStringBuilder;

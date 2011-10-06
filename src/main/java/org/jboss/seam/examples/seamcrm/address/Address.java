@@ -111,7 +111,7 @@ public class Address implements IndexedEntity, Serializable {
         this.account = account;
     }
 
-    @Field(name = "address.description", index = Index.TOKENIZED)
+    @Field(name = "address.description", index = Index.YES)
     public String getDescription() {
         return description;
     }
@@ -231,7 +231,7 @@ public class Address implements IndexedEntity, Serializable {
         setDateModified(new Date());
     }
 
-    @Field(name = "address.addressLine", index = Index.TOKENIZED)
+    @Field(name = "address.addressLine", index = Index.YES)
     @Transient
     public String getAddressLine() {
         if (!StringTools.isNullOrBlank(address2)) {

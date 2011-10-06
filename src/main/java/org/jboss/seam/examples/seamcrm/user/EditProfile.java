@@ -4,7 +4,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
 
-import org.jboss.logging.Logger;
+import org.jboss.solder.logging.Logger;
 import org.jboss.seam.examples.seamcrm.aaa.Authenticated;
 import org.jboss.seam.examples.seamcrm.aaa.SessionUser;
 import org.jboss.seam.examples.seamcrm.contact.Contact;

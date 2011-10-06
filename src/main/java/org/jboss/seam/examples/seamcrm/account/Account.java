@@ -97,7 +97,7 @@ public class Account implements IndexedEntity, Serializable {
 		this.version = version;
 	}
 
-    @Field(name = "account.name", index = Index.TOKENIZED)
+    @Field(name = "account.name", index = Index.YES)
 	@NotNull
 	public String getName() {
 		return name;

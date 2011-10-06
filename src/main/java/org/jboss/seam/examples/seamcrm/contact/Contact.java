@@ -128,13 +128,13 @@ public class Contact implements IndexedEntity, Serializable {
         this.type = type;
     }
 
-    @Field(name = "contact.name", index = Index.TOKENIZED)
+    @Field(name = "contact.name", index = Index.YES)
     @Transient
     public String getName() {
         return ContactTools.buildName(this);
     }
 
-    @Field(name = "contact.emailAddress", index = Index.TOKENIZED)
+    @Field(name = "contact.emailAddress", index = Index.YES)
     @Email
     @Column(unique = true)
     public String getEmailAddress() {
@@ -173,7 +173,7 @@ public class Contact implements IndexedEntity, Serializable {
         this.roleName = roleName;
     }
 
-    @Field(name = "contact.alias", index = Index.TOKENIZED)
+    @Field(name = "contact.alias", index = Index.YES)
     public String getAlias() {
         return alias;
     }

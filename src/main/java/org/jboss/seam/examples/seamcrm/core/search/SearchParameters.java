@@ -10,7 +10,7 @@ import java.util.Set;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
-import org.jboss.logging.Logger;
+import org.jboss.solder.logging.Logger;
 import org.jboss.seam.examples.seamcrm.account.Account;
 import org.jboss.seam.examples.seamcrm.address.Address;
 import org.jboss.seam.examples.seamcrm.contact.Contact;

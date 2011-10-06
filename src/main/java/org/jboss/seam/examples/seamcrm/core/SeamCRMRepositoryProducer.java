@@ -7,7 +7,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceUnit;
 
-import org.jboss.seam.solder.core.ExtensionManaged;
+import org.jboss.solder.core.ExtensionManaged;
 
 
 /**
