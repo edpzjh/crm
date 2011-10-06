@@ -86,7 +86,7 @@ public class Contact implements IndexedEntity, Serializable {
 
     @Transient
     public EntityType getEntityType() {
-        return EntityType.USER;
+        return EntityType.CONTACT;
     }
 
     @Transient
@@ -295,6 +295,7 @@ public class Contact implements IndexedEntity, Serializable {
     private Contact auditClone() {
 
         Contact c = new Contact();
+        c.setAccount(account);
         c.setFirstName(firstName);
         c.setLastName(lastName);
         c.setRoleName(roleName);

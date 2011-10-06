@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:s="http://jboss.org/seam/faces"
+    xmlns:rich="http://richfaces.org/rich"
+    xmlns:a="http://richfaces.org/a4j"
+    xmlns:o="http://java.sun.com/jsf/composite/oss"
+    template="/WEB-INF/templates/default.xhtml">
+	<f:metadata>
+		<s:viewAction action="#{conversationManagement.begin}" />
+		<ui:param name="baseEntity" value="#{user}" />
+	</f:metadata>
+
+	<ui:define name="content">
+			<rich:panel styleClass="pagePanel" header="User - #{user.name}"> 
+        		<div id="entityInfo" class="roundBox">
+        			<div id="image" style="float:left; width:180px;">
+        				<h:graphicImage url="#{userTools.getGravatarURL(user)}"/>
+        			</div>
+        	 		<div id="left" style="float:left; width:39%;">
+        	 			<o:div styleClass="object-field" rendered="#{user.userType == 'ROLE'}">        		
+	        				<div class="object-field-label">Role Name:</div>
+	        				<div class="object-field-value">#{user.roleName}</div>
+	        			</o:div>
+        	 			<o:div styleClass="object-field" rendered="#{user.honorific != null}">        		
+	        				<div class="object-field-label">Honorific:</div>
+	        				<div class="object-field-value">#{user.honorific.displayName}</div>
+	        			</o:div>
+        	 			<o:div styleClass="object-field" rendered="#{user.userType == 'PERSON'}">        		
+	        				<div class="object-field-label">First Name:</div>
+	        				<div class="object-field-value">#{user.firstName}</div>
+	        			</o:div>
+        	 			<o:div styleClass="object-field" rendered="#{user.userType == 'PERSON'}">        		
+	        				<div class="object-field-label">Last Name:</div>
+	        				<div class="object-field-value">#{user.lastName}</div>
+	        			</o:div>
+	        			<o:div styleClass="object-field" rendered="#{user.userType == 'PERSON'}">        		
+	        				<div class="object-field-label">Title:</div>
+	        				<div class="object-field-value">#{user.title}</div>
+	        			</o:div>      	 			
+	        			<div class="object-field">        		
+	        				<div class="object-field-label">Alias:</div>
+	        				<div class="object-field-value">#{user.alias}</div>
+	        			</div>	        			
+	        			<div class="object-field">        		
+							<div class="object-field-label">Organization:</div>
+							<div class="object-field-value">
+								<h:link value="#{user.organization.name}" outcome="/s/i/organization/organization_view.xhtml">
+                    				<f:param name="oid" value="#{user.organization.id}" />
+                    			</h:link>
+							</div>
+						</div>
+						<div class="object-field">        		
+							<o:div styleClass="object-field-label" rendered="#{user.loginEnabled}">Username:</o:div>
+							<o:div styleClass="object-field-label" rendered="#{user.loginEnabled == false}">Email:</o:div>
+							<div class="object-field-value">#{user.username}</div>
+						</div>
+	        			<div class="object-field">        		
+	        				<div class="object-field-label">Timezone:</div>
+	        				<div class="object-field-value">#{user.timeZone.displayName}</div>
+	        			</div>
+	        			<div class="object-field">        		
+	        				<div class="object-field-label">Roles:</div>
+	        				<div class="object-field-value">#{userTools.buildRolesString(user)}</div>
+	        			</div>
+	        			<ui:repeat var="_pn" value="#{user.phoneNumbers}" rendered="#{not empty user.phoneNumbers}">
+	        			<div class="object-field">        		
+	        				<div class="object-field-label">#{_pn.phoneNumberType.displayName}:</div>
+	        				<div class="object-field-value">#{_pn.number}</div>
+	        			</div>
+	        			</ui:repeat>
+        	 		</div>
+        	 		<div id="right" style="float:right; width:39%;">
+        	 			<div class="object-field">        		
+	        				<div class="object-field-label">Active:</div>
+	        				<div class="object-field-value">
+	        					<h:selectBooleanCheckbox value="#{user.active}" readonly="true" disabled="true" style="position:relative; bottom:2px" />
+	        				</div>
+	        			</div>
+	        			<div class="object-field">        		
+	        				<div class="object-field-label">Login Enabled:</div>
+	        				<div class="object-field-value">
+	        					<h:selectBooleanCheckbox value="#{user.loginEnabled}" readonly="true" disabled="true" style="position:relative; bottom:2px" />
+	        				</div>
+	        			</div>
+	        			<o:div styleClass="object-field" rendered="#{!stringTools.isNullOrBlank(user.sfCode)}">        		
+	        				<div class="object-field-label">Salesforce Code:</div>
+	        				<div class="object-field-value">#{user.sfCode}</div>
+	        			</o:div>
+	        			<o:div styleClass="object-field" rendered="#{!stringTools.isNullOrBlank(user.arinPocId)}">        		
+	        				<div class="object-field-label">ARIN POC ID:</div>
+	        				<div class="object-field-value">
+	        					<h:outputLink value="http://whois.arin.net/rest/poc/#{user.arinPocId}" target="#">
+	        						<h:outputText value="#{user.arinPocId}" />
+	        					</h:outputLink>
+	        				</div>
+	        			</o:div>
+	        			<div class="object-field">        		
+	        				<div class="object-field-label">Date Created:</div>
+        					<div class="object-field-value">
+        						<h:outputText value="#{user.dateCreated}">
+                    				<f:convertDateTime pattern="MM/dd/yyyy - HH:mm:ss z" timeZone="#{userTimeZone}"/>
+                    			</h:outputText>
+        					</div>
+        				</div>
+        				<o:div styleClass="object-field" rendered="#{user.active}">        		
+	        				<div class="object-field-label">Date Modified:</div>
+        					<div class="object-field-value">
+        						<h:outputText value="#{user.dateModified}">
+                    				<f:convertDateTime pattern="MM/dd/yyyy - HH:mm:ss z" timeZone="#{userTimeZone}" />
+                    			</h:outputText>
+        					</div>
+        				</o:div>
+        				<o:div styleClass="object-field" rendered="#{user.active == false}">        		
+	        				<div class="object-field-label">Date Inactive:</div>
+        					<div class="object-field-value">
+        						<h:outputText value="#{user.dateInactive}">
+                    				<f:convertDateTime pattern="MM/dd/yyyy - HH:mm:ss z" timeZone="#{userTimeZone}" />
+                    			</h:outputText>
+        					</div>
+        				</o:div>
+        				<o:div styleClass="object-field" rendered="#{user.loginEnabled}">        		
+	        				<div class="object-field-label">Last Login:</div>
+        					<div class="object-field-value">
+        						<h:outputText value="#{user.dateLastLogin}">
+                    				<f:convertDateTime type="date" pattern="MM/dd/yyyy - HH:mm:ss z" timeZone="#{userTimeZone}" />
+                    			</h:outputText>
+        					</div>
+        				</o:div>
+        	 		</div>
+        	 		<div style="clear:both;" />        	 		
+        	 	</div>
+        	 	<div class="actionButtons">
+        	 		<h:form>
+	        	 		<h:commandButton value="Edit User" action="/s/i/user/user_edit.xhtml" />
+	        	 		<h:commandButton value="Delete User" action="#{userUtil.deleteUser()}" disabled="true" rendered="#{identity.hasRole('admin','core','core')}"/>
+						<h:commandButton value="Reset Password" rendered="#{user.loginEnabled and identity.hasRole('admin','core','core')}" >
+							<rich:componentControl target="resetPasswordModal" operation="show" />
+						</h:commandButton>				
+					</h:form>
+				</div> 
+</rich:panel>
+<rich:popupPanel header="Confirm Password Reset" id="resetPasswordModal" autosized="true">
+	<h:form>
+		<div class="actionButtons">
+			<h:commandButton value="Confirm Reset" action="#{userUtil.resetPassword()}" />
+			<h:commandButton value="Cancel" rendered="#{user.loginEnabled}">
+				<rich:componentControl target="resetPasswordModal" operation="hide" />
+			</h:commandButton>
+		</div>
+	</h:form>
+</rich:popupPanel>
+	</ui:define>
+</ui:composition>

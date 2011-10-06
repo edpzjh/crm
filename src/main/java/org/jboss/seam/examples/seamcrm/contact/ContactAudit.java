@@ -21,6 +21,10 @@ public class ContactAudit {
 
         MultiLineStringBuilder sb = new MultiLineStringBuilder();
 
+        if (AuditTools.isChanged(orig.getAccount(), cur.getAccount())) {
+            sb.newLine(AuditTools.changedString("Account", orig.getAccount(), cur.getAccount()));
+        }
+        
         if (AuditTools.isChanged(orig.getFirstName(), cur.getFirstName())) {
             sb.newLine(AuditTools.changedString("First Name", orig.getFirstName(), cur.getFirstName()));
         }

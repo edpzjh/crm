@@ -2,6 +2,7 @@ package org.jboss.seam.examples.seamcrm.converters;
 
 import java.io.Serializable;
 
+import javax.enterprise.context.RequestScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -12,10 +13,14 @@ import javax.persistence.EntityManager;
 import org.jboss.seam.examples.seamcrm.account.Account;
 import org.jboss.seam.examples.seamcrm.tools.StringTools;
 
-
-@FacesConverter("accountConverter")
+/**
+ * 
+ * @author Cody Lerum
+ * 
+ */
+@RequestScoped
+@FacesConverter("AccountConverter")
 public class AccountConverter implements Serializable, Converter {
-
     private static final long serialVersionUID = 1L;
 
     @Inject
@@ -23,7 +28,6 @@ public class AccountConverter implements Serializable, Converter {
 
     @Override
     public Object getAsObject(final FacesContext arg0, final UIComponent arg1, final String id) {
-
         if (!StringTools.isNullOrBlank(id)) {
             return em.find(Account.class, Integer.valueOf(id));
         } else {

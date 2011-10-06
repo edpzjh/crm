@@ -1,11 +1,13 @@
 package org.jboss.seam.examples.seamcrm.core.navigation;
 
-import javax.enterprise.inject.Model;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import org.jboss.seam.security.Identity;
 
-@Model
+@RequestScoped
+@Named
 public class AlreadyLoggedIn {
 
     @Inject

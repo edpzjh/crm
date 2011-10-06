@@ -5,74 +5,21 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
 
 	<navigation-rule>
-		<from-view-id>/*</from-view-id>
-		
+		<from-view-id>/login.xhtml</from-view-id>
+
 		<navigation-case>
 			<from-action>#{identity.login}</from-action>
-			<if>#{identity.loggedIn}</if>
+			<from-outcome>success</from-outcome>
 			<to-view-id>/admin/home.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
 
 		<navigation-case>
 			<from-action>#{identity.login}</from-action>
-			<if>#{!identity.loggedIn}</if>
+			<from-outcome>failed</from-outcome>
 			<to-view-id>/login.xhtml</to-view-id>
-			<redirect />
 		</navigation-case>
 
-		<navigation-case>
-			<from-action>#{identity.logout}</from-action>
-			<if>#{!identity.loggedIn}</if>
-			<to-view-id>/login.xhtml</to-view-id>
-			<redirect />
-		</navigation-case>
-			
-	</navigation-rule>
-
-	<navigation-rule>
-		<from-view-id>/admin/account/account_edit.xhtml</from-view-id>
-		<navigation-case>
-			<from-action>#{accountUtil.update}</from-action>
-			<from-outcome>success</from-outcome>
-			<to-view-id>/admin/account/account_view.xhtml</to-view-id>
-			<redirect>
-				<view-param>
-					<name>oid</name>
-					<value>#{account.id}</value>
-				</view-param>
-			</redirect>
-		</navigation-case>
-	</navigation-rule>
-	
-	<navigation-rule>
-		<from-view-id>/admin/contact/contact_add.xhtml</from-view-id>		
-		<navigation-case>
-			<from-action>#{contactUtil.add}</from-action>
-			<from-outcome>success</from-outcome>
-			<to-view-id>/admin/contact/contact_view.xhtml</to-view-id>
-			<redirect>
-				<view-param>
-					<name>oid</name>
-					<value>#{newContact.id}</value>
-				</view-param>
-			</redirect>
-		</navigation-case>
-	</navigation-rule>
-	
-	<navigation-rule>
-		<from-view-id>/admin/contact/contact_edit.xhtml</from-view-id>		
-		<navigation-case>
-			<from-action>#{contactUtil.update}</from-action>
-			<from-outcome>success</from-outcome>
-			<to-view-id>/admin/contact/contact_view.xhtml</to-view-id>
-			<redirect>
-				<view-param>
-					<name>oid</name>
-					<value>#{contact.id}</value>
-				</view-param>
-			</redirect>
-		</navigation-case>
 	</navigation-rule>
 
 </faces-config>

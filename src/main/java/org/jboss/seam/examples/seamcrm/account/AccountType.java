@@ -9,7 +9,8 @@ import org.jboss.seam.examples.seamcrm.enumerations.BaseEnum;
  */
 public enum AccountType implements BaseEnum {
 
-    BUSINESS("Business"), INDIVIDUAL("Individual");
+    BUSINESS("Business"), 
+    INDIVIDUAL("Individual");
 
     private String displayName;
 

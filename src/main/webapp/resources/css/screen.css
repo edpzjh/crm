@@ -164,3 +164,49 @@ body {
 	float: left;
 	height: 1ex !important;
 }
+
+.globalStack {
+	margin-top: 20px;
+}
+
+.rf-msgs-wrn {
+	color: black !important;
+}
+
+.standardTable {
+	width: 100%;
+}
+
+.standardRow {
+	
+}
+
+.redRow {
+	background-color: #FAD7DF;
+}
+
+.orangeRow {
+	background-color: #F7D3A3;
+}
+
+.yellowRow {
+	background-color: #F9FACF;
+}
+
+.greenRow {
+	background-color: #D3FACF;
+}
+
+.lightGrayRow {
+	background-color: #E8E8E8;
+}
+
+.grayRow {
+	background-color: #CCCCCC;
+}
+
+/*Primefaces autocomplete*/
+.textarea[disabled], input[type="text"][disabled], input[type="password"][disabled], select[disabled] {
+	color:black;
+	font-weight:bolder;
+}

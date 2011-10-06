@@ -3,6 +3,7 @@ package org.jboss.seam.examples.seamcrm.contact;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.event.Event;
@@ -13,12 +14,16 @@ import javax.inject.Named;
 import javax.persistence.EntityManager;
 
 import org.jboss.solder.logging.Logger;
+import org.jboss.solder.servlet.http.RequestParam;
 import org.jboss.seam.examples.seamcrm.aaa.EntityLogs;
 import org.jboss.seam.examples.seamcrm.aaa.EventLog;
 import org.jboss.seam.examples.seamcrm.account.Account;
+import org.jboss.seam.examples.seamcrm.comment.Comment;
+import org.jboss.seam.examples.seamcrm.comment.EntityComments;
 import org.jboss.seam.examples.seamcrm.core.Existing;
+import org.jboss.seam.examples.seamcrm.core.navigation.NavigationTools;
 
-
+@Named
 @ConversationScoped
 public class ContactUtil implements Serializable {
 
@@ -26,8 +31,11 @@ public class ContactUtil implements Serializable {
 
     @Inject
     private EntityManager em;
+    
+    @Inject
+    private Conversation conversation;
 
-    @org.jboss.solder.servlet.http.RequestParam
+    @RequestParam
     @Inject
     private Instance<String> oid;
 
@@ -73,17 +81,26 @@ public class ContactUtil implements Serializable {
     public List<EventLog> contactEventLogs(EntityLogs entityLogs) {
         return entityLogs.fetch(contact);
     }
+    
+    @Produces
+    @RequestScoped
+    @Named
+    public List<Comment> contactComments(EntityComments entityComments) {
+        return entityComments.fetch(contact);
+    }
 
     public String add() {
 
         em.persist(contact);
         eventLog.fire(new EventLog(contact, "Contact Created"));
-
-        return "success";
+        em.flush();
+        conversation.end();
+        return NavigationTools.buildRedirectViewId(contact);
     }
 
     public String update() {
         em.flush();
-        return "success";
+        conversation.end();
+        return NavigationTools.buildRedirectViewId(contact);
     }
 }

@@ -49,7 +49,7 @@ public class AuditTools
         }
         else
         {
-            if (o.getEntityType() == n.getEntityType() && o.getEntityId().equals(n.getEntityId()))
+            if (!o.getEntityId().equals(n.getEntityId()))
             {
                 return true;
             }

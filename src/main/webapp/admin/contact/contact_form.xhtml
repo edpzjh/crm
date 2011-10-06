@@ -5,95 +5,79 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:s="http://jboss.org/seam/faces"
 	xmlns:rich="http://richfaces.org/rich"
-	xmlns:a="http://richfaces.org/a4j">
+	xmlns:a="http://richfaces.org/a4j"
+	xmlns:o="http://java.sun.com/jsf/composite/crm"
+	xmlns:p="http://primefaces.prime.com.tr/ui">
 		
-		<h:panelGroup id="accountPanel" layout="block" styleClass="inputPanel">
-			<h:outputLabel for="account" value="Account" styleClass="label" />
-			<div class="input">
-				<rich:autocomplete 
-				id="account" 
-				value="#{_contact.account}" 
-				autocompleteMethod="#{entitySearch.account}" 
-				var="_a" fetchValue="#{_a}" 
-				converter="accountConverter">
-					<h:outputText value="#{_a.name}" />				
-				</rich:autocomplete>
-			</div>
-			<a:commandLink value="Clear" action="#{_contact.setAccount(null)}" render="accountPanel" style="float:left;" execute="account" /> 
-			<rich:message for="account" styleClass="message" />
-		</h:panelGroup>					
+		<o:decoratePanel inputWidth="300px">
+		
+			<o:decorate divId="accountDecorate" label="Account Manager">
 			
-		<h:panelGroup layout="block" styleClass="inputPanel">
-			<h:outputLabel for="type" value="Type" styleClass="label" />
-			<h:selectOneMenu id="type" value="#{_contact.type}" required="true" styleClass="input">
+				<p:autoComplete id="account" forceSelection="true" value="#{_contact.account}" var="_o" itemLabel="#{_o.name}" itemValue="#{_o}" completeMethod="#{entitySearch.account}" size="30" converter="AccountConverter" disabled="#{_contact.account != null}" style="float:left">
+					<a:ajax event="itemSelect" render="accountDecorate" execute="@this"/>
+				</p:autoComplete>
+				
+				<a:commandLink value="Clear" render="@form" rendered="#{_contact.account != null}" execute="@this" style="float:left;margin-left:5px">
+					<f:setPropertyActionListener target="#{_contact.account}" value="#{null}" />
+				</a:commandLink>
+				
+			</o:decorate>
+		
+		<o:decorate label="Type">
+			<h:selectOneMenu id="type" value="#{_contact.type}" required="true">
 				<f:selectItems value="#{enumValues.contactType}" var="_c" itemValue="#{_c}" itemLabel="#{_c.displayName}" />
-				<f:ajax render="contactNamePanel" />
+				<a:ajax render="contactNamePanel" />
 			</h:selectOneMenu>
-			<rich:message for="type" styleClass="message" />
-		</h:panelGroup>
+		</o:decorate>	
 			
 		<h:panelGroup id="contactNamePanel">
-
-			<h:panelGroup rendered="#{_contact.type == 'PERSON'}">
 			
-				<h:panelGroup layout="block" styleClass="inputPanel">
-					<h:outputLabel for="honorific" value="Honorific" styleClass="label"/>						
-					<h:selectOneMenu id="honorific" value="#{_contact.honorific}" required="false" styleClass="input">
+			<ui:fragment rendered="#{_contact.type == 'PERSON'}">
+			
+				<o:decorate label="Honorific">
+					<h:selectOneMenu value="#{_contact.honorific}" required="false">
 						<f:selectItem itemValue="" itemLabel="None"/>
 						<f:selectItems value="#{enumValues.honorific}" var="_h" itemValue="#{_h}" itemLabel="#{_h.displayName}" />
-					</h:selectOneMenu>							
-					<rich:message for="honorific" styleClass="message" />
-				</h:panelGroup>					
+					</h:selectOneMenu>	
+				</o:decorate>
 			
-				<h:panelGroup layout="block" styleClass="inputPanel">
-					<h:outputLabel for="firstName" value="First Name" styleClass="label"/>						
-					<h:inputText id="firstName" value="#{_contact.firstName}" required="true" size="35" requiredMessage="Required" styleClass="input" />
-					<rich:message for="firstName" styleClass="message" />
-				</h:panelGroup>						
-
-				<h:panelGroup layout="block" styleClass="inputPanel">
-					<h:outputLabel for="lastName" value="Last Name" styleClass="label" />						
-					<h:inputText id="lastName" value="#{_contact.lastName}" required="true" size="35" requiredMessage="Required" styleClass="input"/>
-					<rich:message for="lastName" styleClass="message" />
-				</h:panelGroup>
+				<o:decorate label="First Name">
+					<h:inputText value="#{_contact.firstName}" required="true" size="35" requiredMessage="Required" />				
+				</o:decorate>				
+			
+				<o:decorate label="Last Name">
+					<h:inputText value="#{_contact.lastName}" required="true" size="35" requiredMessage="Required" />				
+				</o:decorate>
 				
-				<h:panelGroup layout="block" styleClass="inputPanel">
-					<h:outputLabel for="title" value="Title" styleClass="label" />						
-					<h:inputText id="title" value="#{_contact.title}" required="false" size="35" styleClass="input" />
-					<rich:message for="title" styleClass="message" />
-				</h:panelGroup>
-
-			</h:panelGroup>
-
-			<h:panelGroup rendered="#{_contact.type == 'ROLE'}">
-			
-				<h:panelGroup layout="block" styleClass="inputPanel">
-					<h:outputLabel for="roleName" value="Role Name" styleClass="label" />						
-					<h:inputText id="roleName" value="#{_contact.roleName}" required="true" size="35" requiredMessage="Required" styleClass="input" />
-					<rich:message for="roleName" styleClass="message" />
-				</h:panelGroup>
+				<o:decorate label="Title">
+					<h:inputText value="#{_contact.title}" required="false" size="35" />			
+				</o:decorate>
 				
-			</h:panelGroup>
+			</ui:fragment>
+
+			<ui:fragment rendered="#{_contact.type == 'ROLE'}">
 			
-			<h:panelGroup layout="block" styleClass="inputPanel">
-				<h:outputLabel for="alias" value="Alias" styleClass="label" />						
-				<h:inputText id="alias" value="#{_contact.alias}" required="false" size="35" styleClass="input" />
-				<rich:message for="alias" styleClass="message" />
-			</h:panelGroup>
+				<o:decorate label="Role Name">
+					<h:inputText value="#{_contact.roleName}" required="true" size="35" requiredMessage="Required" />		
+				</o:decorate>
+				
+			</ui:fragment>
 			
-			<h:panelGroup layout="block" styleClass="inputPanel">
-				<h:outputLabel for="emailAddress" value="Email Address" styleClass="label" />						
-				<h:inputText id="emailAddress" value="#{_contact.emailAddress}" required="false" size="35" styleClass="input" />
-				<rich:message for="emailAddress" styleClass="message" />
-			</h:panelGroup>
+		</h:panelGroup>
+		
+			<o:decorate label="Alias">
+				<h:inputText value="#{_contact.alias}" required="false" size="35" />
+			</o:decorate>
+		
+			<o:decorate label="Email Address">
+				<h:inputText id="emailAddress" value="#{_contact.emailAddress}" required="false" size="35"/>
+			</o:decorate>
 			
-			<h:panelGroup layout="block" styleClass="inputPanel">
-				<h:outputLabel for="timezone" value="Time Zone" styleClass="label" />						
+			<o:decorate label="Time Zone">
 				<h:selectOneMenu id="timezone" value="#{_contact.timeZone}" required="true" styleClass="input">
 					<f:selectItems value="#{enumValues.timeZone}" var="_t" itemValue="#{_t}" itemLabel="#{_t.displayName}" />
-				</h:selectOneMenu>						
-				<rich:message for="timezone" styleClass="message" />
-			</h:panelGroup>
-
-		</h:panelGroup>
+				</h:selectOneMenu>
+			</o:decorate>
+			
+		</o:decoratePanel>
 </ui:composition>

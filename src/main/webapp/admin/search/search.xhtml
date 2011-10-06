@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:rich="http://richfaces.org/rich"
+    template="/WEB-INF/templates/default.xhtml">
+    <ui:define name="content">
+	
+		<h:form>
+			<rich:panel header="Search Results" styleClass="pagePanel">
+				<rich:dataTable value="#{search.results}" var="_r" styleClass="standardTable">
+				
+					<rich:column styleClass="left" headerClass="left">
+						<f:facet name="header">Type</f:facet>
+						<h:outputText value="#{_r.entityType.displayName}" />
+					</rich:column>
+					
+					<rich:column styleClass="left" headerClass="left">
+						<f:facet name="header">Name</f:facet>
+						<h:link value="#{_r.searchResultName}" outcome="#{_r.entityType.viewId}">
+							<f:param name="oid" value="#{_r.entityId}" />
+						</h:link>
+					</rich:column>
+					
+				</rich:dataTable>				
+			</rich:panel>					
+		</h:form>
+				
+    </ui:define>
+</ui:composition>

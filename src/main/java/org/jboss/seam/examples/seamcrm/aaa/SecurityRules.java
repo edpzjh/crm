@@ -9,9 +9,10 @@ import org.jboss.seam.security.annotations.Secures;
  * 
  */
 public class SecurityRules {
-    public @Secures
+    
     @Authenticated
-    boolean loggedInChecker(Identity identity) {
+    @Secures
+    public boolean loggedInChecker(Identity identity) {
         return identity.isLoggedIn();
     }
 }

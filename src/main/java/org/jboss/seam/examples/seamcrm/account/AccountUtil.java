@@ -17,8 +17,10 @@ import org.jboss.solder.logging.Logger;
 import org.jboss.solder.servlet.http.RequestParam;
 import org.jboss.seam.examples.seamcrm.aaa.EntityLogs;
 import org.jboss.seam.examples.seamcrm.aaa.EventLog;
+import org.jboss.seam.examples.seamcrm.comment.Comment;
+import org.jboss.seam.examples.seamcrm.comment.EntityComments;
 import org.jboss.seam.examples.seamcrm.core.Existing;
-
+import org.jboss.seam.examples.seamcrm.core.navigation.NavigationTools;
 
 /**
  * 
@@ -39,7 +41,7 @@ public class AccountUtil implements Serializable {
 
     @Inject
     private Conversation conversation;
-    
+
     @RequestParam
     @Inject
     private Instance<String> oid;
@@ -55,8 +57,7 @@ public class AccountUtil implements Serializable {
     @ConversationScoped
     @Existing
     @Named
-    public Account account()
-    {
+    public Account account() {
         log.info("Running Account Producer");
         account = em.find(Account.class, Integer.valueOf(oid.get()));
         return account;
@@ -69,9 +70,16 @@ public class AccountUtil implements Serializable {
         return entityLogs.fetch(account);
     }
 
+    @Produces
+    @RequestScoped
+    @Named
+    public List<Comment> accountComments(EntityComments entityComments) {
+        return entityComments.fetch(account);
+    }
+
     public String update() {
         em.flush();
         conversation.end();
-        return "success";
+        return NavigationTools.buildRedirectViewId(account);
     }
 }

@@ -2,7 +2,7 @@ package org.jboss.seam.examples.seamcrm.converters;
 
 import java.io.Serializable;
 
-import javax.enterprise.context.SessionScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -11,8 +11,8 @@ import javax.faces.convert.FacesConverter;
 import org.jboss.seam.examples.seamcrm.tools.StringTools;
 
 
-@SessionScoped
-@FacesConverter("stringTrim20Converter")
+@RequestScoped
+@FacesConverter("StringTrim20Converter")
 public class StringTrim20Converter implements Serializable, Converter {
 
     private static final long serialVersionUID = 1L;

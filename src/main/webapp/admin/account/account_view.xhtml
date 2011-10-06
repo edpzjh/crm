@@ -2,9 +2,11 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:s="http://jboss.org/seam/faces"
 	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a="http://richfaces.org/a4j"
 	template="/WEB-INF/templates/default.xhtml">
 	<f:metadata>
 		<s:viewAction action="#{conversationManagement.begin}" />
@@ -29,7 +31,7 @@
 						<div class="object-field-label">Created:</div>
 						<div class="object-field-value">
 						<h:outputText value="#{account.dateCreated}">
-							<f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss z"/>
+							<f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss z" timeZone="#{userTimeZone}"/>
 						</h:outputText>
 						</div>
 					</div>
@@ -37,7 +39,7 @@
 						<div class="object-field-label">Modified:</div>
 						<div class="object-field-value">
 						<h:outputText value="#{account.dateModified}">
-							<f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss z"/>
+							<f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss z" timeZone="#{userTimeZone}"/>
 						</h:outputText>
 						</div>
 					</div>
@@ -113,6 +115,12 @@
 					<h:outputText value="#{_address.description}" />
 				</rich:column>
 			</rich:dataTable>
+		</rich:collapsiblePanel>
+		
+		<rich:collapsiblePanel header="Comments (#{fn:length(accountComments)})" switchType="client" expanded="#{not empty accountComments}" styleClass="innerPanel">						
+			<ui:include src="/admin/includes/comment_panel.xhtml">
+				<ui:param name="comments" value="#{accountComments}" />
+			</ui:include>
 		</rich:collapsiblePanel>
 		
 		<rich:collapsiblePanel header="History" switchType="client" expanded="true" styleClass="innerPanel">

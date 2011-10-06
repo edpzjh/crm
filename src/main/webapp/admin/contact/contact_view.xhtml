@@ -2,6 +2,7 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:s="http://jboss.org/seam/faces"
 	xmlns:rich="http://richfaces.org/rich"
@@ -59,6 +60,12 @@
 				<f:param name="oid" value="#{contact.id}" />
 			</h:button>
 		</div>
+		
+		<rich:collapsiblePanel header="Comments (#{fn:length(contactComments)})" switchType="client" expanded="#{not empty contactComments}" styleClass="innerPanel">						
+			<ui:include src="/admin/includes/comment_panel.xhtml">
+				<ui:param name="comments" value="#{contactComments}" />
+			</ui:include>
+		</rich:collapsiblePanel>
 		
 		<rich:collapsiblePanel header="History" switchType="client" expanded="true">
 			<ui:param name="elog" value="#{contactEventLogs}" />

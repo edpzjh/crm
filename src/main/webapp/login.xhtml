@@ -5,6 +5,7 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:s="http://jboss.org/seam/faces"
 	xmlns:rich="http://richfaces.org/rich"
+	xmlns:o="http://java.sun.com/jsf/composite/crm"
 	template="/WEB-INF/templates/default.xhtml">
 	<ui:define name="metadata">
 		<f:metadata>
@@ -12,22 +13,25 @@
 		</f:metadata>
 	</ui:define>
 	<ui:define name="content">
-		<rich:panel header="Login" style="width:3">
+		<rich:panel header="Login" style="min-width:500px;width:600px;margin-right:auto;margin-left:auto;">
 			<h:form>
-				<h:panelGrid columns="3">
 				
-					<h:outputLabel for="username" value="Username: " />
-					<h:inputText id="username" value="#{credentials.username}" required="true" requiredMessage="Username is Required"/>
-					<rich:message for="username"/>
+				<o:decoratePanel>
 					
-					<h:outputLabel for="password" value="Password: " />
-					<h:inputSecret id="password" value="#{credentials.password}" required="true" requiredMessage="Password is Required"/>
-					<rich:message for="password"/>
+					<o:decorate label="Username">				
+						<h:inputText value="#{credentials.username}" required="true" requiredMessage="Username is Required"/>
+					</o:decorate>
 					
-				</h:panelGrid>
+					<o:decorate label="Password">				
+						<h:inputSecret value="#{credentials.password}" required="true" requiredMessage="Password is Required"/>
+					</o:decorate>
+				
+				</o:decoratePanel>
+				
 				<div class="actionButtons">
 					<h:commandButton value="Login" action="#{identity.login}" />
 				</div>
+				
 			</h:form>
 
 		</rich:panel>

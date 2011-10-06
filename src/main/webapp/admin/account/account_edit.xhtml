@@ -5,6 +5,8 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:s="http://jboss.org/seam/faces"
 	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a="http://richfaces.org/a4j"
+	xmlns:o="http://java.sun.com/jsf/composite/crm"
 	template="/WEB-INF/templates/default.xhtml">
 	<f:metadata>
 		<s:viewAction action="#{conversationManagement.begin}" />		
@@ -12,26 +14,25 @@
 	<ui:define name="content">
 		<rich:panel header="#{account.name}">
 			<h:form>
-				<h:panelGrid columns="3">
+				<o:decoratePanel>
+					
+					<o:decorate label="Account Name">
+						<h:inputText id="accountName" value="#{account.name}" required="true" size="35" requiredMessage="Required" />
+					</o:decorate>
 
-					<h:outputLabel for="accountName" value="Account Name" />
-					<h:inputText id="accountName" value="#{account.name}" required="true"
-						size="35" requiredMessage="Required" />
-					<h:message for="accountName" />
+					<o:decorate label="Type">
+						<h:selectOneMenu id="accountType" value="#{account.type}" required="true">
+							<f:selectItems value="#{enumValues.accountType}" var="a" itemValue="#{a}" itemLabel="#{a.displayName}" />
+						</h:selectOneMenu> 
+					</o:decorate>
 
-					<h:outputLabel for="accountType" value="Type" />
-					<h:selectOneMenu id="accountType" value="#{account.type}" required="true">
-						<f:selectItems value="#{enumValues.accountType}" var="a" itemValue="#{a}" itemLabel="#{a.displayName}" />
-					</h:selectOneMenu> 
-					<h:message for="accountType" />
-
-				</h:panelGrid>
+				</o:decoratePanel>
 
 				<div class="actionButtons">
 					<h:commandButton value="Update" action="#{accountUtil.update}" />
-				<h:button value="Cancel" outcome="account_view">
-					<f:param name="oid" value="#{account.id}" />
-				</h:button>
+					<h:button value="Cancel" outcome="account_view">
+						<f:param name="oid" value="#{account.id}" />
+					</h:button>
 				</div>
 			</h:form>
 		</rich:panel>

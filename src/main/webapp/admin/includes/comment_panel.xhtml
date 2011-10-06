@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:a="http://richfaces.org/a4j"
+	xmlns:o="http://java.sun.com/jsf/composite/crm">
+	
+	<h:panelGroup id="commentsPanel" layout="block">
+	
+		<h:form>		
+				
+				<o:decoratePanel inputWidth="875px">
+				
+					<o:decorate label="Comment">
+						<h:inputTextarea value="#{newComment.comment}" required="true" size="35" requiredMessage="Required" styleClass="input" style="width:850px" cols="200"/>
+					</o:decorate>
+					
+				</o:decoratePanel>		
+				
+				<div class="actionButtons">
+					<a:commandButton action="#{commentUtil.add(baseEntity)}" value="Add Comment" render="@all" />
+				</div>
+				
+		</h:form>
+			
+		<h:form>
+		
+			<h:outputText value="No comments Yet" rendered="#{empty comments}"/>
+			
+			<rich:dataTable id="commentsTable" value="#{comments}" var="_comment" rendered="#{not empty comments}" styleClass="standardTable">
+					
+				<rich:column styleClass="center" headerClass="center" style="width:15%">
+					<f:facet name="header">Date Added</f:facet>
+					<h:outputText value="#{_comment.dateCreated}">
+						<f:convertDateTime pattern="MM/dd/yyyy h:mm:ss a z" timeZone="#{userTimeZone}"/>
+					</h:outputText>
+				</rich:column>	
+							
+				<rich:column styleClass="left" headerClass="left" style="width:15%">
+					<f:facet name="header">User</f:facet>
+					<h:outputText value="#{_comment.user.contact.name}" />
+				</rich:column>
+				
+				<rich:column styleClass="left" headerClass="left">
+					<f:facet name="header">Comment</f:facet>
+					<h:outputText value="#{_comment.comment}" />
+				</rich:column>					
+				
+			</rich:dataTable>
+			
+		</h:form>	
+			
+	</h:panelGroup>	
+	
+</ui:composition>

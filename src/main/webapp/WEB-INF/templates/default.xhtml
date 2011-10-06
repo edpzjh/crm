@@ -8,19 +8,26 @@
 <h:head>
 	<title>SeamCRM</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<h:outputStylesheet name="css/screen.css" />
+	<h:outputStylesheet name="css/screen.css" />	
+	<h:outputScript library="js" name="jquery-1.6.2.min.js" />
+	<h:outputScript library="js" name="global.js" />	
+	<script type="text/javascript">
+    	var $j = jQuery.noConflict(true);
+    	$j(document).ready(pageLoad);
+    	$j(window).resize(sideBarScreenWidthResize);
+    </script>
 </h:head>
 <h:body>
 	<div id="toolbar">
-		<h:form>
+		<h:form id="toolbarForm">
 			<rich:toolbar rendered="#{identity.loggedIn}">
 				<rich:toolbarGroup location="left">
 					<h:button value="Home" outcome="/admin/home"/>
 				</rich:toolbarGroup>
 				
 				<rich:toolbarGroup location="right">
-					<h:form>
-						<h:inputText value="#{search.query}" />
+					<h:form id="searchForm">
+						<h:inputText id="searchInput" value="#{search.query}" />
 						<h:commandButton value="Search" action="#{search.search}" />
 					</h:form>
 				</rich:toolbarGroup>
@@ -36,8 +43,9 @@
 		</h:form>
 	</div>
 	<div id="container">
-		<rich:notifyMessages ajaxRendered="true" stayTime="2000" position="topLeft" globalOnly="true" />
-		<rich:messages globalOnly="true" />
+		<rich:notifyStack id="globalStack" position="topRight" styleClass="globalStack" direction="vertical">
+			<rich:notifyMessages ajaxRendered="true" globalOnly="true" stayTime="2000" stack="globalStack"/>
+		</rich:notifyStack>
 		<div id="content">
 			<ui:insert name="content">
 			</ui:insert>
