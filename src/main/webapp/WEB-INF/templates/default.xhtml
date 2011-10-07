@@ -88,7 +88,7 @@
     </rich:popupPanel>
     
     <h:form>
-		<a:poll actionListener="#{sessionUser.checkIn()}" interval="30000" execute="@this" limitRender="true" bypassUpdates="true" enabled="true" render="@all" rendered="#{identity.loggedIn}"/>
+		<a:poll actionListener="#{sessionUser.checkIn()}" interval="30000" execute="@this" limitRender="true" bypassUpdates="true" enabled="true" render="@none" rendered="#{identity.loggedIn}" immediate="true"/>
 	</h:form>
 </h:body>
 </html>

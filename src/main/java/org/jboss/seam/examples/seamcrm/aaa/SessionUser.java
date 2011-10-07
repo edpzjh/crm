@@ -6,12 +6,14 @@ import java.util.Date;
 import javax.faces.event.ActionEvent;
 
 import org.jboss.seam.examples.seamcrm.user.User;
+import org.jboss.solder.core.Veto;
 
 /**
  * 
  * @author Cody Lerum
  * 
  */
+@Veto
 public class SessionUser implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -21,6 +23,11 @@ public class SessionUser implements Serializable {
     private String imageURL = "";
     private Date lastCheckIn;
 
+    public SessionUser()
+    {
+        
+    }
+    
     public SessionUser(User user, String remoteAddr) {
         this.user = user;
         this.remoteAddr = remoteAddr;

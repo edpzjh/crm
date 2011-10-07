@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.TimeZone;
 
 import javax.ejb.Stateful;
+import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.enterprise.event.Event;
 import javax.enterprise.event.Observes;
@@ -39,6 +40,7 @@ public class SessionUserManager implements Serializable {
     private HttpServletRequest httpServletRequest;
 
     @Produces
+    @RequestScoped
     @Named
     public SessionUser sessionUser() {
         return sessionUser;
