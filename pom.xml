@@ -274,12 +274,6 @@
 		</dependency>
 
 		<dependency>
-			<groupId>co.cfly</groupId>
-			<artifactId>serviceObjects</artifactId>
-			<version>1.0.0</version>
-		</dependency>
-
-		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-search</artifactId>
 			<version>4.0.0.Beta2</version>
