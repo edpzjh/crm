@@ -19,7 +19,6 @@
 		<maven.build.timestamp.format>yyyyMMdd'T'HHmmss</maven.build.timestamp.format>
 		<!-- Specify the JBoss AS directory to be the JBOSS_HOME environment variable -->
 		<jboss.home>${env.JBOSS_HOME}</jboss.home>
-		<seam.version>3.1.0.Beta3</seam.version>
 		<org.richfaces.bom.version>4.1.0-SNAPSHOT</org.richfaces.bom.version>
 		<primefaces.version>3.0.M3</primefaces.version>
 	</properties>
@@ -82,6 +81,15 @@
 				<scope>import</scope>
 				<type>pom</type>
 			</dependency>
+			
+			<dependency>
+				<groupId>org.jboss.seam</groupId>
+				<artifactId>seam-bom</artifactId>
+				<version>3.1.0.Beta4</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			
 		</dependencies>
 	</dependencyManagement>
 
@@ -101,20 +109,12 @@
 			</exclusions>
 		</dependency>
 
-		<!-- Seam Solder provides convenient, portable CDI extensions such as an injectable logger -->
-		<dependency>
-			<groupId>org.jboss.solder</groupId>
-			<artifactId>solder-impl</artifactId>
-			<version>${seam.version}</version>
-		</dependency>
-
 		<!-- JSR-303 (Bean Validation) Implementation -->
 		<!-- Provides portable constraints such as @Email -->
 		<!-- Hibernate Validator is shipped in JBoss AS 7 -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
-			<version>4.1.0.Final</version>
 			<scope>provided</scope>
 			<exclusions>
 				<exclusion>
@@ -165,25 +165,21 @@
 		<dependency>
 			<groupId>org.jboss.seam.security</groupId>
 			<artifactId>seam-security</artifactId>
-			<version>${seam.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.jboss.seam.international</groupId>
 			<artifactId>seam-international</artifactId>
-			<version>${seam.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.jboss.seam.transaction</groupId>
 			<artifactId>seam-transaction</artifactId>
-			<version>${seam.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.jboss.seam.faces</groupId>
 			<artifactId>seam-faces</artifactId>
-			<version>${seam.version}</version>
 		</dependency>
 
 		<dependency>
@@ -195,7 +191,6 @@
 		<dependency>
 			<groupId>org.jboss.seam.persistence</groupId>
 			<artifactId>seam-persistence</artifactId>
-			<version>${seam.version}</version>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
@@ -203,13 +198,11 @@
 		<dependency>
 			<groupId>org.apache.velocity</groupId>
 			<artifactId>velocity</artifactId>
-			<version>1.7</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.jboss.seam.conversation</groupId>
 			<artifactId>seam-conversation-weld</artifactId>
-			<version>3.0.0.CR2</version>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
@@ -252,7 +245,6 @@
 		<dependency>
 			<groupId>com.ocpsoft</groupId>
 			<artifactId>ocpsoft-pretty-time</artifactId>
-			<version>1.0.7</version>
 		</dependency>
 
 		<dependency>
@@ -264,13 +256,12 @@
 		<dependency>
 			<groupId>joda-time</groupId>
 			<artifactId>joda-time</artifactId>
-			<version>2.0</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-search</artifactId>
-			<version>4.0.0.Beta2</version>
+			<version>4.0.0.CR1</version><!--$NO-MVN-MAN-VER$-->
 			<exclusions>
 				<exclusion>
 					<groupId>dom4j</groupId>
@@ -286,7 +277,6 @@
 		<dependency>
 			<groupId>javax.mail</groupId>
 			<artifactId>mail</artifactId>
-			<version>1.4.4</version>
 			<scope>provided</scope>
 		</dependency>
 		
