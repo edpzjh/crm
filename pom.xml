@@ -19,7 +19,7 @@
 		<maven.build.timestamp.format>yyyyMMdd'T'HHmmss</maven.build.timestamp.format>
 		<!-- Specify the JBoss AS directory to be the JBOSS_HOME environment variable -->
 		<jboss.home>${env.JBOSS_HOME}</jboss.home>
-		<org.richfaces.bom.version>4.1.0-SNAPSHOT</org.richfaces.bom.version>
+		<org.richfaces.bom.version>4.1.0.20111101-M4</org.richfaces.bom.version>
 		<primefaces.version>3.0.M3</primefaces.version>
 	</properties>
 
@@ -85,7 +85,7 @@
 			<dependency>
 				<groupId>org.jboss.seam</groupId>
 				<artifactId>seam-bom</artifactId>
-				<version>3.1.0.Beta4</version>
+				<version>3.1.0.Beta5</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
